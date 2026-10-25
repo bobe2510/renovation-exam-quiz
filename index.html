@@ -133,8 +133,8 @@ function home(){
     <h2>題數</h2>
     <div class="seg" id="cntSeg">${['10','20','30','50','all'].map(v=>`<label><input type="radio" name="cnt" value="${v}" ${cnt===v?'checked':''}><span>${v==='all'?'全部':v}</span></label>`).join('')}</div>
     <h2>選項順序</h2>
-    <div class="seg" id="shufSeg">${[['0','依題庫順序'],['1','每次隨機（考試版）']].map(([v,l])=>`<label><input type="radio" name="shuf" value="${v}" ${(settings.shuf||'0')===v?'checked':''}><span>${l}</span></label>`).join('')}</div>
-    <div class="kb">考試版會打亂每題的選項順序（解析中的 ①～④ 會跟著換成新位置），避免只記「答案是第幾個」。選項含「以上皆是」「①②皆對」這類依位置作答的題目維持原順序。</div>
+    <div class="seg" id="shufSeg">${[['0','依題庫順序'],['1','每次隨機']].map(([v,l])=>`<label><input type="radio" name="shuf" value="${v}" ${(settings.shuf||'0')===v?'checked':''}><span>${l}</span></label>`).join('')}</div>
+    <div class="kb">選項隨機會打亂每題的選項順序（解析中的 ①～④ 會跟著換成新位置），避免只記「答案是第幾個」。選項含「以上皆是」「①②皆對」這類依位置作答的題目維持原順序。</div>
     <p class="sub" id="poolInfo"></p>
     <button class="pri" id="start">開始練習</button>
     <div class="kb">錯題本規則：答錯的題目進入錯題本，之後連續答對 ${GRAD} 次即移出。</div>
@@ -205,7 +205,7 @@ function showSheet(){
 
 // ---------- 練習 ----------
 let S=null;
-// ---------- 選項隨機（考試版） ----------
+// ---------- 選項隨機 ----------
 const POSITIONAL = /以上(皆|均|都|全|各|選項|所述|敘述|說明)|(上述|前述)(皆|均|都|選項|各項)|[①②③④]|前(兩|二|三)(項|者)|後(兩|二)(項|者)|選項/;
 function shuffleQ(q){
   if(q.o.some(t=>POSITIONAL.test(t))) return q;           // 依位置作答的題目不動
